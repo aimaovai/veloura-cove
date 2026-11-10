@@ -1,4 +1,8 @@
 target/
+.next/
+node_modules/
+out/
+*.tsbuildinfo
 .idea/
 *.iml
 .env

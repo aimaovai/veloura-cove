@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.velouracove.availability.AvailabilityServiceTest
 -------------------------------------------------------------------------------
-Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.808 s -- in com.velouracove.availability.AvailabilityServiceTest
+Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.689 s -- in com.velouracove.availability.AvailabilityServiceTest

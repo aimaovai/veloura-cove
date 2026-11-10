@@ -2,7 +2,7 @@ spring:
   application:
     name: veloura-cove-api
   datasource:
-    url: ${DB_URL:jdbc:postgresql://localhost:5432/veloura_cove}
+    url: ${DB_URL:jdbc:postgresql://localhost:5433/veloura_cove}
     username: ${DB_USERNAME:veloura}
     password: ${DB_PASSWORD:veloura}
   jpa:
