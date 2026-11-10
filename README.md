@@ -45,7 +45,20 @@ mvn spring-boot:run
 
 Wait for Spring Boot to finish starting. Flyway will create and seed the schema automatically. The API is at `http://localhost:8080/api/v1`; check it by opening `http://localhost:8080/api/v1/accommodation-types`. Swagger UI is at `http://localhost:8080/swagger-ui.html`.
 
-If port `8080` is already in use, start the backend with `$env:SERVER_PORT = "8081"` before `mvn spring-boot:run`; use that same port in the frontend API URL in step 3. If you have previously changed the Compose database credentials, use those same values for `DB_USERNAME` and `DB_PASSWORD`. PostgreSQL keeps its data in a named volume, so changing Compose environment values does not change credentials for a database that has already been initialized.
+**If Maven reports that the port is already in use, do not keep starting backend copies.** First check whether the existing service is this app and is usable. For example, if the log says port `8081` is occupied, run:
+
+```powershell
+@(Invoke-RestMethod -Uri "http://localhost:8081/api/v1/accommodation-types").Count
+```
+
+If it prints `6`, the Veloura Cove API is already running on `8081`; leave it running and use that port for the frontend below. If the request fails or returns something else, try another port, for example:
+
+```powershell
+$env:SERVER_PORT = "8082"
+mvn spring-boot:run
+```
+
+Use the port on which the API actually starts in the frontend URL. If you have previously changed the Compose database credentials, use those same values for `DB_USERNAME` and `DB_PASSWORD`. PostgreSQL keeps its data in a named volume, so changing Compose environment values does not change credentials for a database that has already been initialized.
 
 ### 3. Start the frontend
 
@@ -57,7 +70,14 @@ $env:NEXT_PUBLIC_API_BASE_URL = "http://localhost:8080/api/v1"
 npm run dev
 ```
 
-If you started the backend on port `8081`, set the URL to `http://localhost:8081/api/v1` instead. Open **http://localhost:3000**. Keep all three terminals running while using the app. The frontend reads room, availability, pricing, and reservation data from the backend; it displays an error if the API is unavailable rather than inventing booking data.
+Change the API URL to match the backend port you are using. For example, if the API is already running on `8081`:
+
+```powershell
+$env:NEXT_PUBLIC_API_BASE_URL = "http://localhost:8081/api/v1"
+npm run dev
+```
+
+Open **http://localhost:3000** and keep the backend and frontend terminals running while using the app. The frontend reads room, availability, pricing, and reservation data from the backend; it displays an error if the API is unavailable rather than inventing booking data.
 
 To stop the app, press `Ctrl+C` in the frontend and backend terminals, then stop PostgreSQL from any terminal in the repository root:
 
