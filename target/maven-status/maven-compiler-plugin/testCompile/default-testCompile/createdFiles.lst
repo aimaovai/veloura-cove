@@ -1,0 +1,5 @@
+com\velouracove\pricing\PricingServiceTest.class
+com\velouracove\reservation\ReservationServiceTest.class
+com\velouracove\availability\AvailabilityServiceTest.class
+com\velouracove\common\StayRulesTest.class
+com\velouracove\availability\AvailabilityServiceTest$Fixture.class
